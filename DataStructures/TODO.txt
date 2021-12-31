@@ -1,0 +1,22 @@
+X ArrayList
+X LinkedList
+X HashMap
+- TreeMap (TODO: skipped for now tho bc Red Black Tree deletion steps are complicated)
+X HashSet (skipped implementing, it's implemented using a HashMap)
+- TreeSet
+X Stack (TODO: implement in C++)
+X Minimum Stack
+X Maximum Stack
+X Queue (TODO: implement in C++, skip implementing with array bc trivial)
+- Deque
+- Binary Tree
+- Red Black Tree (TODO: deletion steps)
+- Graph (Adjacency Matrix, Adjacency List)
+- Trie
+- PriorityQueue
+- Segment Tree
+- Disjoint Set
+- Binary Indexed Tree
+- Suffix Array and Tree
+X N-ary Tree (skipped, trivial, just use array of children to node pointers)
+X Suffix Arrays

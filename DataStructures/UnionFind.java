@@ -1,3 +1,22 @@
+// 1. Naive Union-Find:
+// Find: O(n)
+// Union: O(1)
+// This implementation is inefficient because find can be slow in the worst case.
+
+// 2. Weighted Quick-Union:
+// Find: O(log n)
+// Union: O(1)
+// In this implementation, the union operation always joins the smaller tree to the 
+// larger one, which helps to keep the tree height balanced.
+
+// 3. Path Compression:
+// Find: O(log n) (amortized)
+// Union: O(1)
+// Path compression is an optimization technique that flattens the path from the root
+// to the target node during the find operation, making subsequent find operations faster.
+
+
+
 class UnionFind {
     private int[] parent;
     private int[] rank;

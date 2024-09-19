@@ -16,7 +16,6 @@
 // to the target node during the find operation, making subsequent find operations faster.
 
 
-
 class UnionFind {
     private int[] parent;
     private int[] rank;

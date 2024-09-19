@@ -1,0 +1,8 @@
+- TreeMap
+- TreeSet
+- Deque
+- Binary Tree
+- Red Black Tree (TODO: deletion steps)
+- Trie
+- PriorityQueue
+- Segment Tree

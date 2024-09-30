@@ -15,24 +15,35 @@
 // Path compression is an optimization technique that flattens the path from the root
 // to the target node during the find operation, making subsequent find operations faster.
 
+// The time complexity of the find operation in a Union-Find data structure with both path compression and union by rank optimizations is:
+// O(α(n))
+// Where α(n) is the inverse Ackermann function.
+// α(n) grows extremely slowly. For all practical values of n (even up to 2^65536), α(n) is at most 4.
+// Due to this, the find operation is often described as "nearly constant time" in practice.
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 class UnionFind {
     private int[] parent;
     private int[] rank;
-    // CONSTRUCTOR
+
     public UnionFind(int n) {
         parent = new int[n];
         rank = new int[n];
         for(int i = 0; i < n; i++) parent[i] = i;
     }
-    // FIND
+
     public int find(int p) {
         while(p != parent[p]) {
             p = parent[parent[p]]; // Each node is initially its own absolute root
         }
         return p;
     }
-    // UNION, Returns true if we merged 2 components toegether, false otherwise
+
+    // Basically O(1)
+    // Returns true if we merged 2 components toegether, false otherwise
     public boolean union(int p, int q) {
         int rootP = find(p);
         int rootQ = find(q);

@@ -1,13 +1,36 @@
-// BFS: Primarily used to find the shortest path in terms of the number of edges in unweighted graphs.
-// Bellman-Ford: Used to find the shortest path in weighted graphs, including those with negative edge weights.
+// Pseudocode:
+// costs INF for each node besides starting node
+// |V|-1 iterations:
+    // for each edge:
+        // update edge
 
-// Traversal Method:
-// BFS: Explores nodes level by level, moving outward from the start node.
-// Bellman-Ford: Relaxes all edges V-1 times (where V is the number of vertices), not necessarily in a level-wise manner.
+// ============================== Example: ============================== 
+// https://leetcode.com/problems/cheapest-flights-within-k-stops
+class Solution {
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
+        int[] costs = new int[n];
+        Arrays.fill(costs, Integer.MAX_VALUE);
+        costs[src] = 0;
 
-// Distance Updates:
-// BFS: Once a node is visited, its shortest distance from the source is finalized.
-// Bellman-Ford: A node's distance can be updated multiple times as the algorithm progresses.
+        // |V|-1 iterations: (K in this case to satisfy within k stops clause)
+        for(int i = 0; i <= K; ++i) {
+            // for each edge
+            int[] tmpCosts = Arrays.copyOf(costs, costs.length);
+            for(int[] flight : flights) {
+                // update edge cost
+                int from = flight[0];
+                int to = flight[1];
+                int price = flight[2];
+                if(costs[from] == Integer.MAX_VALUE) continue;
+                tmpCosts[to] = Math.min(tmpCosts[to], costs[from] + price);
+            }
+            costs = tmpCosts;
+        }
+
+        return costs[dst] == Integer.MAX_VALUE ? -1 : costs[dst];
+    }
+}
+
 
 // ref: Hackerrank
 void BellmanFord(Graph graph, int src) {
@@ -48,32 +71,5 @@ void BellmanFord(Graph graph, int src) {
                 "Graph contains negative weight cycle");
             return;
         }
-    }
-}
-
-// ============================== Example: ============================== 
-// https://leetcode.com/problems/cheapest-flights-within-k-stops
-class Solution {
-    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
-        int[] cost = new int[n];
-        Arrays.fill(cost,Integer.MAX_VALUE);
-        cost[src] = 0;
-
-        // K iterations
-        for(int i = 0; i <= K; ++i) {
-            // update cost array (which involves using temp array)
-            int[] temp = Arrays.copyOf(cost,n);
-            for(int[] flight : flights) {
-                int curr = flight[0];
-                int next = flight[1];
-                int price = flight[2];
-                if(cost[curr] == Integer.MAX_VALUE) continue;
-                temp[next] = Math.min(temp[next], cost[curr] + price);
-            }
-
-            cost = temp;
-        }
-
-        return cost[dst] == Integer.MAX_VALUE ? -1 : cost[dst];
     }
 }

@@ -1,18 +1,10 @@
-// BFS with priority queue instead of queue
+// Basically just BFS with priority queue instead of queue
 
 // EXAMPLE:
 // https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner
 
 // time: O(nm * log(nm)) because we process each node once. For each node, we have to poll/add from minHeap which is a log(nm) operation.
 // space: O(nm) to store each node in minHeap
-    // NOTE: we don't store the same node multiple times in minHeap
-    // if our neighbour is a node we've never seen before, USING US TO GET THERE IS THE CHEAPEST WAY
-    // thus, can "prematurely" mark as visited
-
-// TLDR:
-// Trick is that you can add weight to the edges
-// a -> b, if b is an obstacle, this edge weight should increase by 1
-// Then, just use Disjkstra's
 
 class Solution {
     public int minimumObstacles(int[][] grid) {

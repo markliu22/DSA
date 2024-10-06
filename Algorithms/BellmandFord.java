@@ -1,8 +1,10 @@
 // BFS: Primarily used to find the shortest path in terms of the number of edges in unweighted graphs.
 // Bellman-Ford: Used to find the shortest path in weighted graphs, including those with negative edge weights.
+
 // Traversal Method:
 // BFS: Explores nodes level by level, moving outward from the start node.
 // Bellman-Ford: Relaxes all edges V-1 times (where V is the number of vertices), not necessarily in a level-wise manner.
+
 // Distance Updates:
 // BFS: Once a node is visited, its shortest distance from the source is finalized.
 // Bellman-Ford: A node's distance can be updated multiple times as the algorithm progresses.
@@ -47,41 +49,31 @@ void BellmanFord(Graph graph, int src) {
             return;
         }
     }
-    printArr(dist, V);
 }
 
 // ============================== Example: ============================== 
+// https://leetcode.com/problems/cheapest-flights-within-k-stops
 class Solution {
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
-        int[] cost=new int[n];
+        int[] cost = new int[n];
         Arrays.fill(cost,Integer.MAX_VALUE);
         cost[src] = 0;
 
+        // K iterations
         for(int i = 0; i <= K; ++i) {
-
-            // temp is just a copy of cost, cost updates to be temp after relaxing all nodes
-            int[] temp= Arrays.copyOf(cost,n);
-
-            for(int[] f: flights) {
-
-                int curr = f[0];
-                int next = f[1];
-                int price = f[2];
-
-                if(cost[curr]==Integer.MAX_VALUE) continue;
-
+            // update cost array (which involves using temp array)
+            int[] temp = Arrays.copyOf(cost,n);
+            for(int[] flight : flights) {
+                int curr = flight[0];
+                int next = flight[1];
+                int price = flight[2];
+                if(cost[curr] == Integer.MAX_VALUE) continue;
                 temp[next] = Math.min(temp[next], cost[curr] + price);
             }
 
-            // update cost to be temp
-            cost=temp;
+            cost = temp;
         }
 
         return cost[dst] == Integer.MAX_VALUE ? -1 : cost[dst];
     }
 }
-// Question: how does the K iterations ensure that we satisfied the "within k stops" clause?
-// In the 0th iteration (i=0), we're only considering direct flights from the source.
-// In the 1st iteration (i=1), we're considering routes with at most 1 stop.
-// In the 2nd iteration (i=2), we're considering routes with at most 2 stops.
-// ...and so on, until we've considered routes with at most K stops.

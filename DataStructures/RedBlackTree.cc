@@ -1,6 +1,9 @@
 // ref: https://algorithmtutor.com/Data-Structures/Tree/Red-Black-Trees/
 // ref: https://www.youtube.com/watch?v=qvZGUFHWChY&ab_channel=MichaelSambol
 
+// Red black tree is a self balancing Binary Searce Tree. 
+// It has a guaranteed height of logn for n nodes 
+
 #include <iostream>
 using namespace std;
 
@@ -133,7 +136,6 @@ private:
 		x->color = 0;
 	}
 
-	// TODO: figure out what this is for
 	void rbTransplant(NodePtr u, NodePtr v){
 		if (u->parent == nullptr) {
 			root = v;
@@ -145,7 +147,6 @@ private:
 		v->parent = u->parent;
 	}
 
-	// TODO: figure out what this is for
 	void deleteNodeHelper(NodePtr node, int key) {
 		// find the node containing key
 		NodePtr z = TNULL;

@@ -1,7 +1,6 @@
 - TreeMap
 - TreeSet
 - Deque
-- Red Black Tree (TODO: deletion steps)
 - PriorityQueue
-- Segment Tree
-- Fenrick Tree
+- Fenwick Tree
+- Monotonic Stack

@@ -2,5 +2,4 @@
 - TreeSet
 - Deque
 - PriorityQueue
-- Fenwick Tree
 - Monotonic Stack

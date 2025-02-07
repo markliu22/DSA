@@ -43,3 +43,37 @@ class FenwickTree {
         System.out.println(ft.rangeSum(1, 5)); // Output: 5 (index 3) + 2 (index 5) = 7
     }
 }
+
+// Example: Leetcode Maximum Difference Between Even and Odd Frequency II
+// Slightly different Fenwick:
+// Fenwick tree class
+// Instead of efficient prefix sum, it's efficient Range Minimum Queries (RMQ)
+// RMQ find the minimum element within some subarray
+static class FenwickTree {
+    int n;
+    int[] tree;
+
+    FenwickTree(int n) {
+        this.n = n;
+        tree = new int[n + 1];
+        Arrays.fill(tree, Integer.MAX_VALUE);
+    }
+
+    void update(int i, int val) {
+        // start at node i + 1 like usual
+        // instead of setting node value = subarray sum, set node val = min subarray element
+        for (int pos = i + 1; pos <= n; pos += pos & -pos) {
+            tree[pos] = Math.min(tree[pos], val);
+        }
+    }
+
+    int query(int i) {
+        int res = Integer.MAX_VALUE;
+        // start at node i + 1 like usual
+        // instead of returning subarray sum, return min subarray element
+        for (int pos = i + 1; pos > 0; pos -= pos & -pos) {
+            res = Math.min(res, tree[pos]);
+        }
+        return res;
+    }
+}

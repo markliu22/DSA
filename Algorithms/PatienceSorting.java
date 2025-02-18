@@ -53,9 +53,9 @@ public int lengthOfLIS(int[] nums) {
         
         while(lo <= hi) {
             int mid = (hi - lo) / 2 + lo;
-            // if my number too big, move left
+            // if my number too big, move right
             if(num > tails[mid]) lo = mid + 1;
-            // if my number satisfies, try to go even more left (GREEDY)
+            // if my number satisfies, try to go even more left (greedy)
             else hi = mid - 1;
         }
         

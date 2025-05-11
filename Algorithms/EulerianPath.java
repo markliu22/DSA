@@ -55,15 +55,10 @@ class Solution {
     }
 
     public void dfs(Map<String,PriorityQueue<String>> adj, String current) {
-        
-        
-        System.out.println("CURR: " + current);
         while(adj.containsKey(current) && !adj.get(current).isEmpty()) {
             String next = adj.get(current).poll();
-            System.out.println("JUST GOT NEXT: " + next);
             dfs(adj,next);
         }
-        System.out.println("CURR: " + current + " ADDED TO RES");
 
         // !!!
         res.addFirst(current);

@@ -36,6 +36,7 @@
 // time: O(E)
 
 // Ex: Leetcode Reconstruct Itinerary
+// Only difference is using PQ since question asks to visit airports in samllest lexical order
 class Solution {
     List<String> res = new LinkedList<>();
 

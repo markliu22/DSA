@@ -1,15 +1,4 @@
-// Basically just BFS with priority queue instead of queue
-
-// this sometimes right, see NOTE below.
-// time: O((V + E)logV) because we process each node once
-    // For each node, we have to poll/add from minHeap which is a logV operation
-// space: O(V) to store each node in minHeap
-
-
-// NOTE: 
-// Some questions like 'Leetcode Minimum Time to Visit Disappearing Nodes', 
-// a node can indeed be added to the minHeap multiple times with different costs.
-// Then the logV part doesn't make sense because minHeap size no longer bounded by V...
+// TLDR: Basically just BFS with priority queue instead of queue
 
 // Actual Complexity:
 // In the worst case, we might add each edge to the queue, leading to O(E) insertions. 
@@ -17,6 +6,17 @@
 
 // This gives us Time Complexity: O(ElogE).
 // Space complexity: O(E)
+
+
+// ASIDE NOTE:
+// Some questions are tricky to determine if Dijkstra's or DP should be used, such as Grid Teleportation Travel
+// Use Dijkstra's if:
+    // Cost to reach a state always the same regardless of how you got there
+    // State space is linear (1D, 2D, 3D) without cycles
+// Use DP if:
+    // Conditional transitions / multiple ways to reach a state with different costs
+    // State transitions resemble graph edges with varying cost/usage constraints
+
 
 // EX: Leetcode Minimum Time to Visit Disappearing Nodes
 class Solution {

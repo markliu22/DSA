@@ -1,11 +1,8 @@
 // TLDR: Basically just BFS with priority queue instead of queue
 
-// Actual Complexity:
-// In the worst case, we might add each edge to the queue, leading to O(E) insertions. 
-// Each insertion and extraction takes O(log E) time (not log V, because the queue can grow larger than V).
-
-// This gives us Time Complexity: O(ElogE).
-// Space complexity: O(E)
+// Time: O(|V| + |E|log|E|)
+// Space: O(|V| + |E|)
+// ref: https://www.youtube.com/watch?v=YMyO-yZMQ6g
 
 
 // ASIDE NOTE:

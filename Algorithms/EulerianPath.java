@@ -1,5 +1,5 @@
 // Existence of Eulerian Path:
-// A path that visists every edge exactly once.
+// A path that visits every edge exactly once.
 // Choosing the wrong starting nodes can lead to having unreachable edges.
 
 // Eulerian Circuit: 
@@ -20,9 +20,9 @@
 // EX: 
 // [0->1]
 // [1->2]
-// [2->1]
 // [1->3]
 // [3->4]
+// [2->1]
 
 // start at 0, dfs, once curr node is stuck (no more unvisited outgoing edges), add curr node to FRONT of solution and backtrack
 // sol:

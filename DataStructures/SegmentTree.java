@@ -1,3 +1,7 @@
+// See C++ implementation, is nicer
+
+
+
 // Used to efficiently perform range queries and updates on an array.
 // It is particularly useful when dealing with problems that require frequent sum, minimum, maximum, 
 // greatest common divisor (GCD), or other associative operations over subarrays.

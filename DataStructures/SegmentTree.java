@@ -5,9 +5,13 @@
 // Example Use Case:
 // Suppose we have an array A = [1, 3, 5, 7, 9, 11], and we want to compute the sum in a given range [L, R] efficiently while allowing modifications to individual elements.
 
-// build O(n)
-// range query O(logn) 
-// point update O(logn)
+// time:
+    // build: O(n)
+    // sum(L, R): O(logn) 
+    // update(pos, val): O(logn)
+// as compared to brute force:
+    // sum(L, R): O(N)
+    // update(pos, Val): O(1)
 
 class SegmentTree {
     private int[] tree; // Segment Tree array
@@ -39,6 +43,7 @@ class SegmentTree {
     }
 
     // Function to update an element at a specific index
+    // The leaf updates, the nodes in the path going up to root also changes
     public void update(int index, int value) {
         update(0, 0, n - 1, index, value);
     }
@@ -58,12 +63,13 @@ class SegmentTree {
                 // Otherwise, update the right child
                 update(rightChild, mid + 1, end, index, value);
             }
-            // After updating the child, recalculate the current node's sum
+            // !! After updating the child, recalculate the current node's sum
             tree[node] = tree[leftChild] + tree[rightChild];
         }
     }
 
     // Function to query the sum of elements in the range [left, right]
+    // TLDR: can select some nodes from tree, will give answer because we have pre-computed sums of various segments
     public int query(int left, int right) {
         return query(0, 0, n - 1, left, right);
     }

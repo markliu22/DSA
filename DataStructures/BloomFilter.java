@@ -1,5 +1,5 @@
 // https://bdupras.github.io/filter-tutorial/
-// https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf
+// time: O(k) insertion and query
 
 // Probabilistic data structure
 // Used to test whether an element is in a set

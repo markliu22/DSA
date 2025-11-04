@@ -1,4 +1,5 @@
 // https://bdupras.github.io/filter-tutorial/
+// https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf
 
 // Probabilistic data structure
 // Used to test whether an element is in a set
@@ -30,9 +31,10 @@
 // Medium uses Bloom filters to avoid recommending articles a user has previously read
 // Ethereum uses Bloom filters to quickly find logs on Eth blockchain
 
-// NOTE: you can't remove elements
-
-// TODO: see Cuckoo filter, alternative to Bloom filter, uses space-efficient cuckoo hashing
+// NOTE: you can't remove elements without rebuilding the entire filter
+// There have been several approaches to extend standard Bloom filters to support deletion, but with signficant space or performance overhead
+// EX: Counting Bloom Filters, but these use 3-4X space to retain the same false positive rate as regular Bloom filter
+// See Cuckoo filter, alternative to Bloom filter, uses space-efficient cuckoo hashing
 
 import java.util.BitSet;
 import java.util.List;

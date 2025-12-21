@@ -35,11 +35,29 @@ class UnionFind {
         for(int i = 0; i < n; i++) parent[i] = i;
     }
 
-    public int find(int p) {
+    // Option 1: Find with full path compression
+    // Ths is the most efficient
+    // Every node visited on the way to the root is updated to point directly to the absolute root
+    public int findRecursive(int p) {
+        if(p == parent[p]) return p;
+        return parent[p] = findRecursive(parent[p]);
+        // NOTE: Assignment (variable = value) returns the value that was just assigned
+    }
+
+    // Option 2: Find with Path Halving
+    // Benefit is O(1) extra space
+    // Makes every node point to its grandparent instead of parent, shortening path by half
+    public int findIterative(int p) {
         while(p != parent[p]) {
-            p = parent[parent[p]]; // Each node is initially its own absolute root
+            parent[p]  = parent[parent[p]];
+            p = parent[p];
         }
         return p;
+    }
+
+    // Default find (using the recursive version for maximum flattening)
+    public int find(int p) {
+        return findRecursive(p);
     }
 
     // Basically O(1)

@@ -1,25 +1,100 @@
-// 1. Naive Union-Find:
-// Find: O(n)
-// Union: O(1)
-// This implementation is inefficient because find can be slow in the worst case.
+// 1. UF Naive:
+    // Find: O(n)
+    // Union: O(n)
+    /*
+    // O(n) worst case
+    int find(int i) {
+        if (parent[i] == i) return i;
+        return find(parent[i]); 
+    }
 
-// 2. Weighted Quick-Union:
-// Find: O(log n)
-// Union: O(1)
-// In this implementation, the union operation always joins the smaller tree to the 
-// larger one, which helps to keep the tree height balanced.
+    // O(n) because it depends on find
+    void unite(int i, int j) {
+        int rootI = find(i);
+        int rootJ = find(j);
+        if (rootI != rootJ) parent[rootI] = rootJ;
+    }
+    */
 
-// 3. Path Compression:
-// Find: O(log n) (amortized)
-// Union: O(1)
-// Path compression is an optimization technique that flattens the path from the root
-// to the target node during the find operation, making subsequent find operations faster.
+// ============================================================================================================
 
-// The time complexity of the find operation in a Union-Find data structure with both path compression and union by rank optimizations is:
-// O(α(n))
-// Where α(n) is the inverse Ackermann function.
-// α(n) grows extremely slowly. For all practical values of n (even up to 2^65536), α(n) is at most 4.
-// Due to this, the find operation is often described as "nearly constant time" in practice.
+// 2. UF with union by Rank
+    // Find: O(log n)
+    // Union: O(log n)
+    // In this implementation, the union operation always joins the smaller tree to the 
+    // larger one, which helps to keep the tree height balanced.
+    /*
+    // O(log n) guaranteed
+    int find(int i) {
+        if (parent[i] == i) return i;
+        return find(parent[i]);
+    }
+    // O(log n)
+    void unite(int i, int j) {
+        int rootI = find(i);
+        int rootJ = find(j);
+        if (rootI != rootJ) {
+            if (rank[rootI] < rank[rootJ]) parent[rootI] = rootJ;
+            else if (rank[rootI] > rank[rootJ]) parent[rootJ] = rootI;
+            else {
+                parent[rootI] = rootJ;
+                rank[rootJ]++;
+            }
+        }
+    }
+    */
+
+// ============================================================================================================
+
+// 3. UF with Path Compression:
+    // Find: O(log n) amortized
+    // Union: O(log n) amortized
+    // Path compression is an optimization technique that flattens the path from the root
+    // to the target node during the find operation, making subsequent find operations faster.
+    /*
+    // O(log n) amortized
+    int find(int i) {
+        if (parent[i] == i) return i;
+        return parent[i] = find(parent[i]); // assignment here is the compression
+    }
+
+    void unite(int i, int j) {
+        int rootI = find(i);
+        int rootJ = find(j);
+        if (rootI != rootJ) parent[rootI] = rootJ;
+    }
+    */
+
+// ============================================================================================================
+
+// 4. Union with both !!
+// The time complexity of union & find operations with both path compression and union by rank optimizations is: O(α(n))
+    // α(n) is the inverse Ackermann function.
+    // α(n) grows extremely slowly. For all practical values of n (even up to 2^65536), α(n) is at most 4.
+    // because of this, the union & find operation is often described as "nearly constant time" in practice.
+    /*
+    // O(α(n))
+    int find(int i) {
+        if (parent[i] == i) return i;
+        return parent[i] = find(parent[i]); // Path Compression
+    }
+    // O(α(n))
+    void unite(int i, int j) {
+        int rootI = find(i);
+        int rootJ = find(j);
+        if (rootI != rootJ) {
+            // Union by Rank
+            if (rank[rootI] < rank[rootJ]) parent[rootI] = rootJ;
+            else if (rank[rootI] > rank[rootJ]) parent[rootJ] = rootI;
+            else {
+                parent[rootI] = rootJ;
+                rank[rootJ]++;
+            }
+        }
+    }
+    */
+
+// ============================================================================================================
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -79,8 +154,8 @@ class UnionFind {
     }
 }
 
+// ============================================= Example: Number of Islands 2: ============================================= 
 
-// ============================== Example: Number of Islands 2: ============================== 
 public List<Integer> numIslands2(int m, int n, int[][] positions) {
     UnionFind uf = new UnionFind(m * n);
     ArrayList<Integer> res = new ArrayList<>();

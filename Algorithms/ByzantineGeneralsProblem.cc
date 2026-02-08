@@ -16,6 +16,10 @@
     // 3. Majority Vote; each lieutenant collects all the messages they received (direct from command
     // and relayed by peers) and takes a majority vote to decide their final decision
 
+// time: O(n^m) where n = total number of generals, m = number of traitors
+    // Each recursive call reaches out to n different lieutenants, recursion goes m deep
+// space: O(nm)
+
 #include <iostream>
 #include <vector>
 #include <memory>

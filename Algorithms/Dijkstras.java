@@ -3,6 +3,7 @@
 // Time: O(|V| + |E|log|E|)
 // Space: O(|V| + |E|)
 // ref: https://www.youtube.com/watch?v=YMyO-yZMQ6g
+// See comments at bottom
 
 
 // ASIDE NOTE:
@@ -59,3 +60,18 @@ class Solution {
         return res;
     }
 }
+
+// 1. Standard Implementation: O(E log V)
+// This version assumes the heap supports a Decrease-Key operation (updating an existing element's priority).
+    // Extract Min: Performed V times. Each takes O(log V). Total: O(V log V).
+    // Decrease-Key: Performed for up to E edges. Each takes O(log V). Total: O(E log V).
+    // Total: O((V + E) log V), which simplifies to O(E log V) for connected graphs.
+
+// 2. "Lazy" Implementation: O(E log E)
+// Common in languages like C++ (std::priority_queue) or Python (heapq) where you cannot easily update a value inside the heap.
+    //  Instead, you push a new pair into the heap every time a shorter path is found.
+    // See Minimum Cost to Convert String I.cc
+
+// Heap Size: Can grow up to E elements (one per edge).
+// Operations: Each push/pop takes O(log E).
+// Total: O(E log E).

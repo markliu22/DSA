@@ -1,5 +1,44 @@
 // See java implementation
 
+// ============================================= Example: Number of Good Paths (C++): ============================================= 
+
+struct UnionFind {
+    vector<int> parent;
+    vector<int> rank;
+    int cnt;
+
+    UnionFind(int cnt) : cnt(cnt) {
+        parent = vector<int>(cnt);
+        rank = vector<int>(cnt);
+
+        for(int i = 0; i < cnt; ++i) parent[i] = i;
+    }
+
+    int find(int p) {
+        if(parent[p] == p) return p;
+        parent[p] = find(parent[p]); // NOTE: this is the path compression here, instead of just return find(parent[p]);
+        return parent[p];
+    }
+
+    bool united(int p, int q) {
+        return find(p) == find(q);
+    }
+
+    void unite(int p, int q) {
+        int rootP = find(p);
+        int rootQ = find(q);
+        if(rootP == rootQ) return;
+
+        // NOTE: this is the union by rank, instead of just blindly setting parent of one equal to the other
+        if(rank[rootP] < rank[rootQ]) {
+            parent[rootP] = rootQ;
+        } else {
+            parent[rootQ] = rootP;
+            if(rank[rootP] == rank[rootQ]) rank[rootQ]++;
+        }
+    }
+};
+
 class Solution {
 public:
     int numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edges) {
